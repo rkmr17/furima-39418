@@ -21,20 +21,19 @@
 
 ## items テーブル
 
-| Column             | Type       | Options                        |
-| ------------------ | ---------- | ------------------------------ |
-| item_name          | string     | null: false                    |
-| description        | text       | null: false                    |
-| price              | string     | null: false                    |
-| delivery_cost      | string     | null: false                    |
-| user               | references | null: false  foreign_key: true |
+| Column              | Type       | Options                        |
+| ------------------- | ---------- | ------------------------------ |
+| item_name           | string     | null: false                    |
+| item_information_id | integer    | null: false                    |
+| price               | integer    | null: false                    |
+| user                | references | null: false  foreign_key: true |
 
 ### Association
 
 -belongs_to :user
 -has_one  :order
 
-## delivery_information テーブル
+## delivery_informations テーブル
 
 | Column         | Type       | Options                        |
 | -------------- | ---------- | ------------------------------ |
@@ -60,5 +59,5 @@
 ### Association
 
 -belongs_to :item
--has_one    :user
+-belongs_to :user
 -has_one    :delivery_information
