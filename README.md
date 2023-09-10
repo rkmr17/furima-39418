@@ -9,7 +9,6 @@
 | nickname           | string | null: false              |
 | last_name          | string | null: false              |
 | first_name         | string | null: false              |
-| full_name          | string | null: false              |
 | kana_last_name     | string | null: false              |
 | kana_first_name    | string | null: false              |
 | birth_date         | date   | null: false              |
@@ -27,6 +26,7 @@
 | item_name          | string     | null: false                    |
 | description        | text       | null: false                    |
 | price              | string     | null: false                    |
+| delivery_cost      | string     | null: false                    |
 | user               | references | null: false  foreign_key: true |
 
 ### Association
@@ -44,23 +44,21 @@
 | street_address | string     | null: false                    |
 | building_name  | string     |                                |
 | phone_number   | string     | null: false                    |
-| user           | references | null: false                    |
+| order          | references | null: false  foreign_key: true |
 
 ### Association
 
--belongs_to :user
 -belongs_to :order
 
 ## orders テーブル
 
 | Column               | Type       | Options                        |
 | -------------------- | ---------- | ------------------------------ |
-| delivery_cost        | string     | null: false                    |
-| delivery_information | references | null: false  foreign_key: true |
 | item                 | references | null: false  foreign_key: true |
 | user                 | references | null: false  foreign_key: true |
 
 ### Association
 
 -belongs_to :item
+-has_one    :user
 -has_one    :delivery_information
