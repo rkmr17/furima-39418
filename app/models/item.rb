@@ -9,7 +9,7 @@ class Item < ApplicationRecord
   validates :delivery_cost_id,      presence: true, numericality: { other_than: 1 }
   validates :shipping_area_id,      presence: true, numericality: { other_than: 1 }
   validates :shipping_lead_time_id, presence: true, numericality: { other_than: 1 }
-  validates :price,                 presence: true
+  validates :price,                 presence: true, numericality: { greater_than: 300, less_than: 9999999 }, format: { with: /\A\d+\Z/, message: "Price is out of setting range" }
   validates :user,                  presence: true
 
   belongs_to :user
