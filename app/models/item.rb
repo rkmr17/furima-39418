@@ -4,13 +4,12 @@ class Item < ApplicationRecord
   validates :image,                 presence: true
   validates :item_name,             presence: true
   validates :description,           presence: true
-  validates :price,                 presence: true, numericality: { greater_than: 300, less_than: 9999999 }, format: { with: /\A\d+\Z/ }
+  validates :price,                 presence: true, numericality: { only_integer: true, greater_than: 299, less_than: 10000000 }
   validates :category_id,           presence: true, numericality: { other_than: 1, message: "can't be blank" }
   validates :condition_id,          presence: true, numericality: { other_than: 1, message: "can't be blank" }
   validates :delivery_cost_id,      presence: true, numericality: { other_than: 1, message: "can't be blank" }
   validates :shipping_area_id,      presence: true, numericality: { other_than: 1, message: "can't be blank" }
   validates :shipping_lead_time_id, presence: true, numericality: { other_than: 1, message: "can't be blank" }
-  validates :user,                  presence: true
 
   belongs_to :user
 
