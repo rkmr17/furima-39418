@@ -30,7 +30,7 @@ RSpec.describe Item, type: :model do
       it 'categoryが空だと登録できない' do
         @item.category_id = ''
         @item.valid?
-        expect(@item.errors.full_messages).to include ("Category can't be blank")
+        expect(@item.errors.full_messages).to include("Category can't be blank")
       end
       it "categoryで'---'が選択されている場合は登録できない" do
         @item.category_id = Category.find(1)
@@ -85,27 +85,27 @@ RSpec.describe Item, type: :model do
       it 'priceの値が300未満だと登録できない' do
         @item.price = '299'
         @item.valid?
-        expect(@item.errors.full_messages).to include("Price must be greater than 299")
+        expect(@item.errors.full_messages).to include('Price must be greater than 299')
       end
       it 'priceの値が9999999より大きいと登録できない' do
         @item.price = '10000000'
         @item.valid?
-        expect(@item.errors.full_messages).to include("Price must be less than 10000000")
+        expect(@item.errors.full_messages).to include('Price must be less than 10000000')
       end
       it 'pricsは全角(漢字・ひらがな・カタカナ)での登録はできない' do
         @item.price = 'あ'
         @item.valid?
-        expect(@item.errors.full_messages).to include("Price is not a number")
+        expect(@item.errors.full_messages).to include('Price is not a number')
       end
       it 'priceは全角数値での登録はできない' do
         @item.price = '３００'
         @item.valid?
-        expect(@item.errors.full_messages).to include("Price is not a number")
+        expect(@item.errors.full_messages).to include('Price is not a number')
       end
       it 'userが紐付いていなければ出品できない' do
         @item.user = nil
         @item.valid?
-        expect(@item.errors.full_messages).to include("User must exist")
+        expect(@item.errors.full_messages).to include('User must exist')
       end
     end
   end
