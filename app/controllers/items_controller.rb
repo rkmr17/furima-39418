@@ -36,17 +36,19 @@ class ItemsController < ApplicationController
   end
 
   private
+
   def set_item
     @item = Item.find(params[:id])
   end
 
   def item_params
-    params.require(:item).permit(:image, :item_name, :description, :category_id, :condition_id, :delivery_cost_id,:shipping_area_id, :shipping_lead_time_id, :price).merge(user_id: current_user.id)
+    params.require(:item).permit(:image, :item_name, :description, :category_id, :condition_id, :delivery_cost_id,
+                                 :shipping_area_id, :shipping_lead_time_id, :price).merge(user_id: current_user.id)
   end
 
   def move_to_index
-    unless user_signed_in? && current_user.id == @item.user_id
-      redirect_to action: :index
-    end
+    return if user_signed_in? && current_user.id == @item.user_id
+
+    redirect_to action: :index
   end
 end
