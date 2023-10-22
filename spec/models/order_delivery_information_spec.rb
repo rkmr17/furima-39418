@@ -5,8 +5,6 @@ RSpec.describe OrderDeliveryInformation, type: :model do
     user = FactoryBot.create(:user)
     item = FactoryBot.create(:item, user_id: user.id)
     @order_delivery_information = FactoryBot.build(:order_delivery_information, user_id: user.id, item_id: item.id)
-    user.save
-    item.save
   end
 
   describe '購入情報登録' do
@@ -52,6 +50,16 @@ RSpec.describe OrderDeliveryInformation, type: :model do
       end
       it 'phone_numberが正しい形式でないと保存できない' do
         @order_delivery_information.phone_number = "090-1234-5678"
+        @order_delivery_information.valid?
+        expect(@order_delivery_information.errors.full_messages).to include("Phone number is invalid")
+      end
+      it '電話番号が9桁以下では購入できない' do
+        @order_delivery_information.phone_number = '090123456'
+        @order_delivery_information.valid?
+        expect(@order_delivery_information.errors.full_messages).to include("Phone number is invalid")
+      end
+      it '電話番号が12桁以上では購入できない' do
+        @order_delivery_information.phone_number = '090123456789'
         @order_delivery_information.valid?
         expect(@order_delivery_information.errors.full_messages).to include("Phone number is invalid")
       end
