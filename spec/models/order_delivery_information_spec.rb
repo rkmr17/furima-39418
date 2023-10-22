@@ -24,14 +24,14 @@ RSpec.describe OrderDeliveryInformation, type: :model do
         expect(@order_delivery_information.errors.full_messages).to include("Postal code can't be blank")
       end
       it 'postal_codeが半角のハイフンを含んだ正しい形式でないと保存できない' do
-        @order_delivery_information.postal_code = 1234567
+        @order_delivery_information.postal_code = 1_234_567
         @order_delivery_information.valid?
-        expect(@order_delivery_information.errors.full_messages).to include("Postal code is invalid")
+        expect(@order_delivery_information.errors.full_messages).to include('Postal code is invalid')
       end
       it "shipping_areaで'---'が選択されている場合は登録できない" do
         @order_delivery_information.shipping_area_id = 1
         @order_delivery_information.valid?
-        expect(@order_delivery_information.errors.full_messages).to include("Shipping area must be other than 1")
+        expect(@order_delivery_information.errors.full_messages).to include('Shipping area must be other than 1')
       end
       it 'cityが空だと保存できない' do
         @order_delivery_information.city = ''
@@ -49,19 +49,19 @@ RSpec.describe OrderDeliveryInformation, type: :model do
         expect(@order_delivery_information.errors.full_messages).to include("Phone number can't be blank")
       end
       it 'phone_numberが正しい形式でないと保存できない' do
-        @order_delivery_information.phone_number = "090-1234-5678"
+        @order_delivery_information.phone_number = '090-1234-5678'
         @order_delivery_information.valid?
-        expect(@order_delivery_information.errors.full_messages).to include("Phone number is invalid")
+        expect(@order_delivery_information.errors.full_messages).to include('Phone number is invalid')
       end
       it '電話番号が9桁以下では購入できない' do
         @order_delivery_information.phone_number = '090123456'
         @order_delivery_information.valid?
-        expect(@order_delivery_information.errors.full_messages).to include("Phone number is invalid")
+        expect(@order_delivery_information.errors.full_messages).to include('Phone number is invalid')
       end
       it '電話番号が12桁以上では購入できない' do
         @order_delivery_information.phone_number = '090123456789'
         @order_delivery_information.valid?
-        expect(@order_delivery_information.errors.full_messages).to include("Phone number is invalid")
+        expect(@order_delivery_information.errors.full_messages).to include('Phone number is invalid')
       end
       it 'tokenが空だと保存できない' do
         @order_delivery_information.token = ''

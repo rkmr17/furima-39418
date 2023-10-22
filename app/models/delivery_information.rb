@@ -1,6 +1,6 @@
 class DeliveryInformation < ApplicationRecord
   extend ActiveHash::Associations::ActiveRecordExtensions
-  
+
   belongs_to :order
 
   # ActiveHash
