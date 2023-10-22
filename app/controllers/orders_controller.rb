@@ -38,7 +38,7 @@ class OrdersController < ApplicationController
   end
 
   def move_to_index
-   if Order.exists?(item: @item.id) || !user_signed_in?
+   if Order.exists?(item: @item.id) || !user_signed_in? || current_user.id == @item.user_id
     redirect_to '/'
    end
   end
