@@ -2,10 +2,13 @@ require 'rails_helper'
 
 RSpec.describe OrderDeliveryInformation, type: :model do
   before do
-    user = FactoryBot.create(:user, last_name: "かな")
+    user = FactoryBot.create(:user)
     item = FactoryBot.create(:item, user_id: user.id)
     @order_delivery_information = FactoryBot.build(:order_delivery_information, user_id: user.id, item_id: item.id)
+    user.save
+    item.save
   end
+
   describe '購入情報登録' do
     context '購入情報が登録できるとき' do
       it '必要な情報が存在すれば登録できる' do
@@ -46,6 +49,16 @@ RSpec.describe OrderDeliveryInformation, type: :model do
         @order_delivery_information.phone_number = ''
         @order_delivery_information.valid?
         expect(@order_delivery_information.errors.full_messages).to include("Phone number can't be blank")
+      end
+      it 'phone_numberが正しい形式でないと保存できない' do
+        @order_delivery_information.phone_number = "090-1234-5678"
+        @order_delivery_information.valid?
+        expect(@order_delivery_information.errors.full_messages).to include("Phone number is invalid")
+      end
+      it 'tokenが空だと保存できない' do
+        @order_delivery_information.token = ''
+        @order_delivery_information.valid?
+        expect(@order_delivery_information.errors.full_messages).to include("Token can't be blank")
       end
       it 'userが紐付いていないと保存できない' do
         @order_delivery_information.user_id = nil
