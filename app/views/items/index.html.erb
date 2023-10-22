@@ -133,11 +133,11 @@
           <%= link_to item_path(item.id) do %>
           <div class='item-img-content'>
             <%= image_tag(item.image, class: "item-img")%>
-            <%# if Item.orders.exists? %>
+            <% if Order.exists?(item: item.id) %>
               <div class='sold-out'>
                 <span>Sold Out!!</span>
               </div>
-            <%# end %>
+            <% end %>
           </div>
             <div class='item-info'>
               <h3 class='item-name'>
