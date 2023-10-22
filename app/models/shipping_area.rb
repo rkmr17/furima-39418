@@ -52,4 +52,5 @@ class ShippingArea < ActiveHash::Base
 
   include ActiveHash::Associations
   has_many :item
+  has_many :delivery_information
 end

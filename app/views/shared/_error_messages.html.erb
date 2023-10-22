@@ -1,8 +1,12 @@
-<% if @user && @user.errors.any? || @item && @item.errors.any? %>
+<% if @user && @user.errors.any? || @item && @item.errors.any? || @order_delivery_information && @order_delivery_information.errors.any? %>
 <div class="error-alert">
   <ul>
-    <% @item.errors.full_messages.each do |message| %>
-    <li class='error-message'><%= message %></li>
+    <% [@user, @item, @order_delivery_information].each do |model| %>
+      <% if model && model.errors.any? %>
+        <% model.errors.full_messages.each do |message| %>
+          <li class='error-message'><%= message %></li>
+        <% end %>
+      <% end %>
     <% end %>
   </ul>
 </div>
