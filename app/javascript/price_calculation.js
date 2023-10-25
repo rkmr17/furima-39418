@@ -5,7 +5,7 @@ const price_calculation = () => {
     const addTaxDom = document.getElementById("add-tax-price")
     addTaxDom.innerHTML = Math.floor(inputValue / 10)
     const profitDom = document.getElementById("profit")
-    profitDom.innerHTML = Math.round(inputValue - (inputValue / 10) )
+    profitDom.innerHTML = Math.ceil(inputValue - (inputValue / 10) )
   })
 }
 
